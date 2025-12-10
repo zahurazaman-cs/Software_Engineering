@@ -1,4 +1,6 @@
-Choco Solver Frontend–Backend Web Interface
+##Name: Zahura Zaman
+##Project Name: Web-Based Frontend Extension for Choco Solver: Open Source Software for Constraint Programming
+
 A Web-Based Constraint Modeling and Solving Environment Using Choco-Solver and Spring Boot
 Overview
 This project provides a complete web-based interface for interacting with the Choco constraint solver. It consists of:
