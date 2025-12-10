@@ -1,5 +1,6 @@
-##Name: Zahura Zaman
-##Project Name: Web-Based Frontend Extension for Choco Solver: Open Source Software for Constraint Programming
+Name: Zahura Zaman
+
+Project Name: Web-Based Frontend Extension for Choco Solver: Open Source Software for Constraint Programming
 
 A Web-Based Constraint Modeling and Solving Environment Using Choco-Solver and Spring Boot
 Overview
