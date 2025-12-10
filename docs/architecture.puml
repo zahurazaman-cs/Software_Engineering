@@ -1,0 +1,98 @@
+@startuml
+title Choco Solver Web - Architecture Overview
+
+package "Frontend (HTML/CSS/JS)" {
+    component "index.html"
+    component "intvar.html"
+    component "boolvar.html"
+    component "realvar.html"
+    component "setvar.html"
+    component "graphvar.html"
+
+    component "intvar.js"
+    component "boolvar.js"
+    component "realvar.js"
+    component "setvar.js"
+    component "graphvar.js"
+
+    component "style.css"
+}
+
+package "Backend (Spring Boot)" {
+    class SolverController
+
+    class SolverService
+    class BoolSolverService
+    class RealSolverService
+    class SetSolverService
+    class GraphSolverService
+
+    class SolveRequest
+    class SolveResponse
+
+    class BoolSolveRequest
+    class BoolSolveResponse
+
+    class RealSolveRequest
+    class RealSolveResponse
+
+    class SetSolveRequest
+    class SetSolveResponse
+
+    class GraphSolveRequest
+    class GraphSolveResponse
+
+    class SolverApplication
+}
+
+package "Choco Solver Library" <<external>> {
+    class Model
+    class Solver
+    class IntVar
+    class BoolVar
+    class RealVar
+    class SetVar
+    class GraphVar
+}
+
+' Frontend -> Backend API Calls
+intvar.js --> SolverController : POST /api/solve
+boolvar.js --> SolverController : POST /api/solve-bool
+realvar.js --> SolverController : POST /api/solve-real
+setvar.js --> SolverController : POST /api/solve-set
+graphvar.js --> SolverController : POST /api/solve-graph
+
+' Controller -> Services
+SolverController --> SolverService
+SolverController --> BoolSolverService
+SolverController --> RealSolverService
+SolverController --> SetSolverService
+SolverController --> GraphSolverService
+
+' Controller uses Request/Response DTOs
+SolverController --> SolveRequest
+SolverController --> SolveResponse
+
+SolverController --> BoolSolveRequest
+SolverController --> BoolSolveResponse
+
+SolverController --> RealSolveRequest
+SolverController --> RealSolveResponse
+
+SolverController --> SetSolveRequest
+SolverController --> SetSolveResponse
+
+SolverController --> GraphSolveRequest
+SolverController --> GraphSolveResponse
+
+' Services Use Choco Model and Variables
+SolverService --> Model
+SolverService --> IntVar
+BoolSolverService --> BoolVar
+RealSolverService --> RealVar
+SetSolverService --> SetVar
+GraphSolverService --> GraphVar
+
+Model --> Solver
+
+@enduml

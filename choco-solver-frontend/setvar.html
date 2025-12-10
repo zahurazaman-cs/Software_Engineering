@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>SetVar Constraints</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="page">
+        <!-- Shared site header -->
+        <header class="site-header">
+            <h1>Choco Solver</h1>
+            <p>Work with set variables and apply cardinality and membership constraints.</p>
+        </header>
+
+        <!-- Page title -->
+        <h1>Set Variables (SetVar)</h1>
+
+        <!-- Stack all content vertically -->
+        <div class="stack-vertical">
+
+            <!-- Constraint selection + universe -->
+            <section class="card">
+                <h2>Select SetVar constraint</h2>
+                <p>Sets are subsets of {0, 1, …, universeSize − 1}.</p>
+
+                <div class="field-row">
+                    <label for="setConstraintKind">Constraint:</label>
+                    <select id="setConstraintKind">
+                        <option value="CARD_EQ">|S| = k</option>
+                        <option value="CARD_LE">|S| ≤ k</option>
+                        <option value="CARD_GE">|S| ≥ k</option>
+                        <option value="MEMBER">x ∈ S</option>
+                        <option value="NOT_MEMBER">x ∉ S</option>
+                        <option value="EQUAL">S₁ = S₂</option>
+                        <option value="SUBSET_EQ">S₁ ⊆ S₂</option>
+                        <option value="DISJOINT">S₁ and S₂ disjoint</option>
+                    </select>
+                </div>
+
+                <div class="field-row">
+                    <label>
+                        Universe size (n):
+                        <input type="number" id="universeSize" value="5" min="1" max="50" />
+                    </label>
+                    <span class="helper-text">Universe = {0, 1, …, n − 1}</span>
+                </div>
+            </section>
+
+            <!-- Cardinality -->
+            <section class="card" id="cardRow">
+                <h2>Cardinality k</h2>
+                <div class="field-row">
+                    <label>
+                        k:
+                        <input type="number" id="cardK" value="2" min="0" />
+                    </label>
+                </div>
+            </section>
+
+            <!-- Element x -->
+            <section class="card" id="elemRow">
+                <h2>Element x</h2>
+                <div class="field-row">
+                    <label>
+                        x:
+                        <input type="number" id="elementX" value="1" min="0" />
+                    </label>
+                    <span class="helper-text">(must be between 0 and n − 1)</span>
+                </div>
+            </section>
+
+            <!-- Solve button -->
+            <section class="card">
+                <button id="setSolveButton">Solve SetVar constraint</button>
+            </section>
+
+            <!-- Output -->
+            <section class="card">
+                <h2>Output</h2>
+                <pre id="setOutput">Choose a constraint and click "Solve".</pre>
+            </section>
+
+            <!-- Back -->
+            <section class="card">
+                <button onclick="window.location.href='index.html'">
+                    Back to variable type selection
+                </button>
+            </section>
+
+        </div> <!-- /.stack-vertical -->
+    </div> <!-- /.page -->
+
+    <script src="setvar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+com/example/solver/BoolSolverService.class
+com/example/solver/GraphSolveRequest.class
+com/example/solver/SolveResponse.class
+com/example/solver/RealSolveResponse.class
+com/example/solver/SetSolveResponse.class
+com/example/solver/SetSolveRequest.class
+com/example/solver/GraphSolverService.class
+com/example/solver/SolverController.class
+com/example/solver/SolveRequest.class
+com/example/solver/SolverApplication.class
+com/example/solver/RealSolveRequest.class
+com/example/solver/SolverService.class
+com/example/solver/SetSolverService.class
+com/example/solver/BoolSolveResponse.class
+com/example/solver/RealSolverService.class
+com/example/solver/GraphSolveResponse.class
+com/example/solver/BoolSolveRequest.class

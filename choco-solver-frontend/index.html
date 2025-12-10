@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Choco Solver – Select Variable Type</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="page">
+        <!-- Shared site header (same style as intvar.html) -->
+        <header class="site-header">
+            <h1>Choco Solver</h1>
+            <p>Select a variable type to start building and solving constraints.</p>
+        </header>
+
+        <!-- Page title -->
+        <h1>Select types of variables</h1>
+
+        <!-- Stack all cards vertically -->
+        <div class="stack-vertical">
+
+            <!-- Choose variable type -->
+            <section class="card">
+                <h2>Choose a variable type</h2>
+
+                <p>First choose what type of variables you want to work with:</p>
+
+                <div class="field-row">
+                    <label for="variableType">Variable type:</label>
+                    <select id="variableType">
+                        <option value="INT">Integer Variables (IntVar)</option>
+                        <option value="BOOL">Boolean Variables (BoolVar)</option>
+                        <option value="REAL">Real Variables (RealVar)</option>
+                        <option value="SET">Set Variables (SetVar)</option>
+                        <option value="GRAPH">Graph Variables (GraphVar)</option>
+                    </select>
+                </div>
+
+                <p class="helper-text">
+                    You can always come back here to switch to a different variable type.
+                </p>
+
+                <button id="goButton">Continue</button>
+            </section>
+
+            <!-- Small info card about what each page does (optional but nice UX) -->
+            <section class="card">
+                <h2>What happens next?</h2>
+                <ul>
+                    <li><strong>IntVar</strong> – work with integer variables and constraints such as comparisons,
+                        sums, and arithmetic expressions.</li>
+                    <li><strong>BoolVar</strong> – work with boolean variables and counting constraints.</li>
+                    <li><strong>RealVar</strong> – work with real-valued variables and linear/constant constraints.</li>
+                    <li><strong>SetVar</strong> – model sets (cardinality, membership, subset, etc.).</li>
+                    <li><strong>GraphVar</strong> – explore constraints on graphs (e.g., node degrees).</li>
+                </ul>
+            </section>
+
+        </div> <!-- /.stack-vertical -->
+    </div> <!-- /.page -->
+
+    <script>
+        // Handle navigation based on selected variable type
+        const variableTypeSelect = document.getElementById("variableType");
+        const goButton = document.getElementById("goButton");
+
+        goButton.addEventListener("click", () => {
+            const value = variableTypeSelect.value;
+            if (value === "INT") {
+                window.location.href = "intvar.html";
+            } else if (value === "BOOL") {
+                window.location.href = "boolvar.html";
+            } else if (value === "REAL") {
+                window.location.href = "realvar.html";
+            } else if (value === "SET") {
+                window.location.href = "setvar.html";
+            } else if (value === "GRAPH") {
+                window.location.href = "graphvar.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

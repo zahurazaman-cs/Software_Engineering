@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>IntVar Constraint Solver</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="page">
+        <!-- Top site header -->
+        <header class="site-header">
+            <h1>Choco Solver</h1>
+            <p>Define integer constraints and solve them using Choco Solver.</p>
+        </header>
+
+        <!-- Page title -->
+        <h1>Integer Variable (IntVar) Constraint Solver</h1>
+
+        <!-- Stack all cards vertically -->
+        <div class="stack-vertical">
+
+            <!-- Select what type of constraint user want to solve -->
+            <section class="card">
+                <h2>Select what type of constraint you want to solve</h2>
+                <select id="constraintType">
+                    <option value="BASIC">Basic Comparison (x ? y)</option>
+                    <option value="SUM">Sum Constraint (x + y ? z)</option>
+                    <option value="ARITH">Arithmetic Expression (X+Y, X-Y, ...)</option>
+                </select>
+            </section>
+
+            <!-- Variable domains for BASIC and SUM -->
+            <section class="card" id="domainsSection">
+                <h2>Select value range for variables x and y (0 to 100)</h2>
+                <div class="field-row">
+                    <label>
+                        x from
+                        <input type="number" id="xMin" value="0" min="0" max="100" />
+                        to
+                        <input type="number" id="xMax" value="100" min="0" max="100" />
+                    </label>
+                </div>
+                <div class="field-row">
+                    <label>
+                        y from
+                        <input type="number" id="yMin" value="0" min="0" max="100" />
+                        to
+                        <input type="number" id="yMax" value="100" min="0" max="100" />
+                    </label>
+                </div>
+            </section>
+
+            <!-- BASIC comparison options -->
+            <section class="card" id="basicSection">
+                <h2>Basic comparison between x and y</h2>
+                <label><input type="radio" name="basicOp" value="EQ" checked /> x = y</label>
+                <label><input type="radio" name="basicOp" value="NE" /> x ≠ y</label>
+                <label><input type="radio" name="basicOp" value="GT" /> x &gt; y</label>
+                <label><input type="radio" name="basicOp" value="LT" /> x &lt; y</label>
+                <label><input type="radio" name="basicOp" value="GE" /> x ≥ y</label>
+                <label><input type="radio" name="basicOp" value="LE" /> x ≤ y</label>
+            </section>
+
+            <!-- SUM constraint options -->
+            <section class="card" id="sumSection">
+                <h2>Sum constraint: x + y ? z</h2>
+                <div class="field-row">
+                    <span>x + y</span>
+                    <select id="sumComparison">
+                        <option value="EQ">=</option>
+                        <option value="GT">&gt;</option>
+                        <option value="LT">&lt;</option>
+                        <option value="GE">≥</option>
+                        <option value="LE">≤</option>
+                        <option value="NE">≠</option>
+                    </select>
+                    <span>z =</span>
+                    <input type="number" id="zValue" value="10" min="0" max="200" />
+                </div>
+            </section>
+
+            <!-- Arithmetic expression options -->
+            <section class="card" id="arithSection">
+                <h2>Arithmetic expression (X+Y / X-Y / X*Y / X/Y)</h2>
+
+                <div class="field-row">
+                    <label>
+                        x value:
+                        <input type="number" id="xValue" value="5" min="0" max="100" />
+                    </label>
+                    <label>
+                        y value:
+                        <input type="number" id="yValue" value="3" min="0" max="100" />
+                    </label>
+                </div>
+
+                <div class="field-row">
+                    <label><input type="radio" name="arithOp" value="ADD" checked /> x + y</label>
+                    <label><input type="radio" name="arithOp" value="SUB" /> x − y</label>
+                    <label><input type="radio" name="arithOp" value="MUL" /> x × y</label>
+                    <label><input type="radio" name="arithOp" value="DIV" /> x ÷ y</label>
+                </div>
+            </section>
+
+            <!-- Solve button -->
+            <section class="card">
+                <button id="solveButton">Solve</button>
+            </section>
+
+            <!-- Output areas -->
+            <section class="card">
+                <h2>Output (values of x, y, z)</h2>
+                <pre id="outputVariables">Click "Solve" to see values.</pre>
+            </section>
+
+            <section class="card">
+                <h2>Output (expression result)</h2>
+                <pre id="outputExpression">Expression result will appear here.</pre>
+            </section>
+
+        </div> <!-- end .stack-vertical -->
+    </div> <!-- end .page -->
+
+    <script src="intvar.js"></script>
+</body>
+
+</html>

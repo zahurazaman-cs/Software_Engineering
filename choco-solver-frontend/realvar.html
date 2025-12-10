@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>RealVar Constraints</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="page">
+        <!-- Shared site header -->
+        <header class="site-header">
+            <h1>Choco Solver</h1>
+            <p>Define real-valued constraints with precision and solve them using Choco Solver.</p>
+        </header>
+
+        <!-- Page title -->
+        <h1>Real Variables (RealVar)</h1>
+
+        <!-- Stack all cards vertically -->
+        <div class="stack-vertical">
+
+            <!-- Constraint selector -->
+            <section class="card">
+                <h2>Select RealVar constraint</h2>
+                <p>Real values are approximated with 2 decimal digits of precision.</p>
+
+                <div class="field-row">
+                    <label for="realConstraintKind">Constraint:</label>
+                    <select id="realConstraintKind">
+                        <option value="X_LE_CONST">x ≤ constant</option>
+                        <option value="X_GE_CONST">x ≥ constant</option>
+                        <option value="X_EQ_CONST">x = constant</option>
+                        <option value="X_LE_Y">x ≤ y</option>
+                        <option value="X_GE_Y">x ≥ y</option>
+                        <option value="X_EQ_Y">x = y</option>
+                        <option value="LIN_EQ">a₁x + a₂y = constant</option>
+                        <option value="LIN_LE">a₁x + a₂y ≤ constant</option>
+                        <option value="LIN_GE">a₁x + a₂y ≥ constant</option>
+                        <option value="ABS_DIFF_LE">|x − y| ≤ d</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Domain ranges -->
+            <section class="card">
+                <h2>Domains for x and y</h2>
+
+                <div class="field-row">
+                    <label>
+                        x from
+                        <input type="number" id="realXMin" value="0" step="0.01" />
+                        to
+                        <input type="number" id="realXMax" value="10" step="0.01" />
+                    </label>
+                </div>
+
+                <div class="field-row">
+                    <label>
+                        y from
+                        <input type="number" id="realYMin" value="0" step="0.01" />
+                        to
+                        <input type="number" id="realYMax" value="10" step="0.01" />
+                    </label>
+                </div>
+            </section>
+
+            <!-- Constant value section -->
+            <section class="card" id="constRow">
+                <h2>Constant value</h2>
+                <div class="field-row">
+                    <label>
+                        constant:
+                        <input type="number" id="realConstant" value="5" step="0.01" />
+                    </label>
+                </div>
+            </section>
+
+            <!-- Linear coefficients -->
+            <section class="card" id="linearRow">
+                <h2>Linear coefficients</h2>
+                <div class="field-row">
+                    <label>
+                        a₁ (integer):
+                        <input type="number" id="coef1" value="1" step="1" />
+                    </label>
+
+                    <label>
+                        a₂ (integer):
+                        <input type="number" id="coef2" value="1" step="1" />
+                    </label>
+                </div>
+            </section>
+
+            <!-- Distance bound -->
+            <section class="card" id="distanceRow">
+                <h2>Distance bound</h2>
+                <div class="field-row">
+                    <label>
+                        d (for |x − y| ≤ d):
+                        <input type="number" id="distanceBound" value="1" step="0.01" />
+                    </label>
+                </div>
+            </section>
+
+            <!-- Solve button -->
+            <section class="card">
+                <button id="realSolveButton">Solve RealVar constraint</button>
+            </section>
+
+            <!-- Output -->
+            <section class="card">
+                <h2>Output</h2>
+                <pre id="realOutput">Choose a constraint and click "Solve".</pre>
+            </section>
+
+            <!-- Back -->
+            <section class="card">
+                <button onclick="window.location.href='index.html'">
+                    Back to variable type selection
+                </button>
+            </section>
+
+        </div> <!-- /.stack-vertical -->
+    </div> <!-- /.page -->
+
+    <script src="realvar.js"></script>
+</body>
+
+</html>

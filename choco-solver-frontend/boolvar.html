@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>BoolVar Constraints</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="page">
+        <!-- Shared site header -->
+        <header class="site-header">
+            <h1>Choco Solver</h1>
+            <p>Define boolean constraints and explore their solutions.</p>
+        </header>
+
+        <!-- Page title -->
+        <h1>Boolean Variables (BoolVar)</h1>
+
+        <!-- Stack all content vertically -->
+        <div class="stack-vertical">
+
+            <section class="card">
+                <h2>Select BoolVar constraint</h2>
+                <p>Choose what kind of boolean constraint you want to solve:</p>
+
+                <div class="field-row">
+                    <label for="boolConstraintKind">Constraint:</label>
+                    <select id="boolConstraintKind">
+                        <option value="AND">AND(b₀, b₁, …) must be true</option>
+                        <option value="OR">OR(b₀, b₁, …) must be true</option>
+                        <option value="NOT">NOT(b₀) must be true</option>
+                        <option value="IMPLIES">b₀ → b₁ (implication)</option>
+                        <option value="EQUIV">b₀ ↔ b₁ (equivalence)</option>
+                        <option value="COUNT_EQ">#true(bools) = k (exactly k true)</option>
+                        <option value="COUNT_LE">#true(bools) ≤ k (at most k true)</option>
+                        <option value="COUNT_GE">#true(bools) ≥ k (at least k true)</option>
+                    </select>
+                </div>
+
+                <div class="field-row">
+                    <label>
+                        Number of boolean variables (n):
+                        <input type="number" id="numBools" value="3" min="1" max="20" />
+                    </label>
+                </div>
+
+                <div class="field-row" id="kRow">
+                    <label>
+                        k (for counting constraints):
+                        <input type="number" id="kValue" value="1" min="0" max="20" />
+                    </label>
+                </div>
+
+                <button id="boolSolveButton">Solve BoolVar constraint</button>
+            </section>
+
+            <section class="card">
+                <h2>Output</h2>
+                <pre id="boolOutput">Choose a constraint and click "Solve".</pre>
+            </section>
+
+            <section class="card">
+                <button onclick="window.location.href='index.html'">
+                    Back to variable type selection
+                </button>
+            </section>
+
+        </div> <!-- /.stack-vertical -->
+    </div> <!-- /.page -->
+
+    <script src="boolvar.js"></script>
+</body>
+
+</html>

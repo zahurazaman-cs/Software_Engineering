@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>GraphVar Constraints</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="page">
+        <!-- Shared site header -->
+        <header class="site-header">
+            <h1>Choco Solver </h1>
+            <p>Model graphs and enforce degree constraints on selected nodes.</p>
+        </header>
+
+        <!-- Page title -->
+        <h1>Graph Variables</h1>
+
+        <!-- Stack all content vertically -->
+        <div class="stack-vertical">
+
+            <section class="card">
+                <h2>Select Graph constraint</h2>
+                <p>
+                    We model an undirected graph with nodes 0..n−1 and edges decided by the solver.
+                    Here we support degree constraints on a chosen node.
+                </p>
+
+                <div class="field-row">
+                    <label for="graphConstraintKind">Constraint:</label>
+                    <select id="graphConstraintKind">
+                        <option value="DEGREE_EQ">degree(node) = k</option>
+                        <option value="DEGREE_LE">degree(node) ≤ k</option>
+                        <option value="DEGREE_GE">degree(node) ≥ k</option>
+                    </select>
+                </div>
+
+                <div class="field-row">
+                    <label>
+                        Number of nodes (n):
+                        <input type="number" id="numNodes" value="4" min="2" max="20" />
+                    </label>
+                    <span class="helper-text">Nodes are labeled 0, 1, …, n − 1.</span>
+                </div>
+
+                <div class="field-row">
+                    <label>
+                        Node index:
+                        <input type="number" id="nodeIndex" value="0" min="0" />
+                    </label>
+                    <span class="helper-text">This is the node whose degree is constrained.</span>
+                </div>
+
+                <div class="field-row">
+                    <label>
+                        Degree k:
+                        <input type="number" id="degreeK" value="2" min="0" />
+                    </label>
+                </div>
+
+                <button id="graphSolveButton">Solve Graph constraint</button>
+            </section>
+
+            <section class="card">
+                <h2>Output</h2>
+                <pre id="graphOutput">Choose a constraint and click "Solve".</pre>
+            </section>
+
+            <section class="card">
+                <button onclick="window.location.href='index.html'">
+                    Back to variable type selection
+                </button>
+            </section>
+
+        </div> <!-- /.stack-vertical -->
+    </div> <!-- /.page -->
+
+    <script src="graphvar.js"></script>
+</body>
+
+</html>
