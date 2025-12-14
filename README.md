@@ -2,19 +2,20 @@ Name: Zahura Zaman
 
 Project Name: Web-Based Frontend Extension for Choco Solver: Open Source Software for Constraint Programming
 
-A Web-Based Constraint Modeling and Solving Environment Using Choco-Solver and Spring Boot
-Overview
+
+
+Overview:
 This project provides a complete web-based interface for interacting with the Choco constraint solver. It consists of:
 A static HTML/CSS/JavaScript frontend that allows users to construct constraint problems in a browser.
 A Spring Boot backend exposing REST APIs that receive user-defined constraints, translate them into Choco-solver models, execute the solver, and return JSON responses.
 The system supports the full range of variable types implemented in Choco-solver, including IntVar, BoolVar, RealVar, SetVar, and GraphVar.
 The aim of this project is to offer a structured and user-friendly interface for constraint specification while delegating problem solving to Choco’s underlying engine.
 
-Documentation, Support, and Issues
+Documentation, Support, and Issues:
 The project demonstrates how a modern frontend communicates with a Java + Spring backend to construct and solve constraint programming models.
 Issues and enhancement requests can be submitted through the GitHub issue tracker of this repository.
 
-Architecture
+Architecture:
 Project Structure
 /choco-solver-frontend
     index.html
@@ -35,17 +36,20 @@ Project Structure
 The frontend consists of static HTML pages styled through CSS and controlled through lightweight JavaScript that sends JSON to the backend via HTTP POST calls.
 The backend is a Spring Boot application that uses Choco-solver internally.
 
-Backend Dependencies
+Backend Dependencies:
 The backend of this project is implemented using Spring Boot 3.3.0, Java 17, and Choco-solver 4.10.14. Maven is used for dependency management and project configuration.
-Requirements
+
+Requirements:
 JDK 17+
 Maven 3+
 Spring Boot 3.3.x (Web starter)
 Choco-solver 4.10.14
 Lombok (optional, used for reducing boilerplate)
 Jackson (included automatically with Spring Boot)
-Maven Dependencies (excerpt from pom.xml)
+Maven Dependencies (from pom.xml)
 The following dependencies are used to run the backend:
+
+
 <!-- Spring Boot Web Starter -->
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -74,11 +78,14 @@ The following dependencies are used to run the backend:
     <scope>test</scope>
 </dependency>
 
-Notes
+
+Notes:
 Jackson JSON processor is automatically included as part of
 spring-boot-starter-web, so no additional Jackson dependency is required.
 This enables automatic JSON serialization/deserialization for all REST API controllers.
 The project uses Spring Boot’s dependency management via:
+
+
 <dependencyManagement>
     <dependencies>
         <dependency>
@@ -93,19 +100,21 @@ The project uses Spring Boot’s dependency management via:
 
 This ensures consistent dependency versions across the backend.
 
-Connecting to Choco-Solver
+Connecting to Choco-Solver:
 Each backend controller follows a general pattern:
-Receive structured JSON describing variable domains, constraint type, and parameters.
+Receive structured JSON describing variable domains, constraint type, and parameters from SolverController to SolverService (every service files)
 Create a Choco Model.
 Instantiate the appropriate variable type (IntVar, BoolVar, RealVar, SetVar, GraphVar).
 Post the corresponding constraint onto the model.
 Call solver.solve().
-Return extracted solution(s) in JSON format.
+Return extracted solutions in JSON format.
 General Flow Example
-@PostMapping("/api/intvar/solve")
+@PostMapping("/api/solve")
 public ResponseEntity<?> solveIntVar(@RequestBody IntVarRequest request) {
 
-    Model model = new Model("IntVar Problem");
+For IntVar (Example):
+
+    Model model = new Model("SUM Constraints");
 
     IntVar x = model.intVar("x", request.getXMin(), request.getXMax());
     IntVar y = model.intVar("y", request.getYMin(), request.getYMax());
@@ -142,11 +151,11 @@ public ResponseEntity<?> solveIntVar(@RequestBody IntVarRequest request) {
 
 The other controllers follow the same structure but use variable types appropriate to their domain.
 
-API Structure and JSON Formats
+API Structure and JSON Formats:
 The frontend communicates with the backend exclusively using JSON via HTTP POST calls.
 Each variable type has a dedicated API endpoint.
 1. IntVar API
-POST /api/intvar/solve
+POST /api/solve
 Example Request JSON
 {
   "constraintType": "SUM",
@@ -167,7 +176,7 @@ Example Response
 
 
 2. BoolVar API
-POST /api/boolvar/solve
+POST /api/solve-bool
 Request JSON
 {
   "constraintType": "AND",
@@ -186,7 +195,7 @@ Response JSON
 
 
 3. RealVar API
-POST /api/realvar/solve
+POST /api/solve-real
 Request JSON
 {
   "constraintType": "LIN_EQ",
@@ -210,7 +219,7 @@ model.realLinearCombination(
 
 
 4. SetVar API
-POST /api/setvar/solve
+POST /api/solve-set
 Request JSON
 {
   "constraintType": "CARD_EQ",
@@ -224,7 +233,7 @@ model.cardinality(s, k).post();
 
 
 5. GraphVar API
-POST /api/graphvar/solve
+POST /api/solve-graph
 Request JSON
 {
   "constraintType": "DEGREE_GE",
@@ -238,7 +247,7 @@ GraphVar g = model.graphVar("G", model.nodeSet(0, n-1));
 model.degree(g, nodeIndex, ">=", k).post();
 
 
-Frontend–Backend Communication
+Frontend–Backend Communication:
 Each HTML page includes a corresponding JavaScript file:
 intvar.js
 boolvar.js
@@ -247,7 +256,7 @@ setvar.js
 graphvar.js
 The JavaScript constructs JSON objects from the user inputs and sends them to the backend using fetch:
 Example (intvar.js)
-fetch("http://localhost:8080/api/intvar/solve", {
+fetch("http://localhost:8080/api/intvar/solve", {   //--> (This HTTP POST request goes to the main backend Controller Application which is   SolverCOntroller.java file (@PostMapping) from there it connects to the @Sevice (Service files for each types of variables)
     method: "POST",
     headers: {
         "Content-Type": "application/json"
@@ -259,40 +268,36 @@ fetch("http://localhost:8080/api/intvar/solve", {
     document.getElementById("outputVariables").textContent = JSON.stringify(data, null, 2);
 });
 
-Each frontend page corresponds exactly to one API controller.
+Each frontend page corresponds exactly to one API controller. // (/api/solve or /api/solve-bool.., etc.)
 The backend responds synchronously with the computed solution.
 
-Running the Project
-Running the Backend
+SolveRequest.java files: These files receive what the frontend sends as JSON (as per types of variables and constraints)
+SolveResponse.java files: These files receive what the backend sends as JSON after solving that variable and constraint in SolverService.java files (as er types of variables)
+
+Running the Project:
+
+Running the Backend:
 cd choco-solver-backend-ui
+mvn clean package
 mvn spring-boot:run
 
 The backend will be accessible at:
 http://localhost:8080
 
-Running the Frontend
-Open the file:
-choco-solver-frontend/index.html
-
-in any modern browser.
+Running the Frontend:
+Open the file in Live server:
+choco-solver-frontend/index.html in any modern browser.
 No additional server is required; the frontend communicates directly with the backend.
 
-Summary of Supported Constraint Types
-Variable Type
-Supported Constraints
-IntVar
-Basic comparisons, arithmetic, sums
-BoolVar
-Logical operations, equivalence, counting
-RealVar
-Linear, relational, distance constraints
-SetVar
-Cardinality, membership, subset, equality
-GraphVar
-Node degree constraints
+Summary of Supported Constraint Types Per Variable Type:
+
+IntVar supports Basic comparisons, arithmetic, sums
+BoolVar supports Logical operations, equivalence, counting
+RealVar supports Linear, relational, distance constraints
+SetVar supports Cardinality, membership, subset, equality
+GraphVar supports Node degree constraints
 
 
-Contributing
 Contributions are welcome, including:
 Additional constraint types
 UI improvements
@@ -300,7 +305,7 @@ Backend extensions
 Documentation updates
 Submit pull requests or open issues in the repository.
 
-License
+License:
 This project follows the licensing terms of the included components (Choco-solver: BSD 4-Clause License). 
 
 Acknowledgement
